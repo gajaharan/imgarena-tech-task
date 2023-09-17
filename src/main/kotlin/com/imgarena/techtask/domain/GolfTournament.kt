@@ -1,7 +1,7 @@
 package com.imgarena.techtask.domain
 
 import lombok.NonNull
-import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -14,7 +14,7 @@ data class GolfTournament(
     @NonNull val courseName: String = "",
     @NonNull val eventName: String = "",
     @NonNull val countryName: String = "",
-    @NonNull val startDate: LocalDate = LocalDate.now(),
-    @NonNull val endDate: LocalDate = LocalDate.now(),
+    @NonNull val startDate: LocalDateTime = LocalDateTime.now(),
+    @NonNull val endDate: LocalDateTime = LocalDateTime.now(),
     @NonNull val rounds: Int = 0
 )
