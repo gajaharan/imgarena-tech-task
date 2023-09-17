@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(GolfTournamentController::class)
-class GolfTournamentControllerTest {
+internal class GolfTournamentControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 

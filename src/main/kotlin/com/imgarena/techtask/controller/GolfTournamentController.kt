@@ -20,7 +20,7 @@ class GolfTournamentController {
     fun createGolfTournament(
         @RequestHeader(value = "x-data-src-id") dataSourceId: String,
         @RequestBody body: String
-    ) : ResponseEntity<Void>  {
+    ): ResponseEntity<Void> {
         log.info("Receiving a request from $dataSourceId")
         return ResponseEntity.ok().build()
     }
