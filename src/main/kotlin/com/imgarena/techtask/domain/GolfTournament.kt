@@ -7,8 +7,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "golf_tournament")
 data class GolfTournament(
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull @Id val id: Long = 0,
     @NonNull val externalId: String = "",
     @NonNull val externalSource: String = "",
     @NonNull val courseName: String = "",
@@ -17,4 +15,7 @@ data class GolfTournament(
     @NonNull val startDate: LocalDateTime = LocalDateTime.now(),
     @NonNull val endDate: LocalDateTime = LocalDateTime.now(),
     @NonNull val rounds: Int = 0
-)
+) {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull @Id val id: Long = 0
+}

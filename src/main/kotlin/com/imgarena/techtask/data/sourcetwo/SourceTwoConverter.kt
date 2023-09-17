@@ -15,7 +15,6 @@ class SourceTwoConverter : GolfTournamentConverter<SourceTwo>() {
     override fun convert(body: String): GolfTournament =
         with(this.toEntity(body)) {
             GolfTournament(
-                id = 2,
                 externalId = this.tournamentUUID,
                 externalSource = dataSourceId(),
                 courseName = this.golfCourse,
@@ -30,11 +29,11 @@ class SourceTwoConverter : GolfTournamentConverter<SourceTwo>() {
     override fun jClass(): Class<SourceTwo> =
         SourceTwo::class.java
 
-    fun Instant.toLocalDateTime(): LocalDateTime =
+    private fun Instant.toLocalDateTime(): LocalDateTime =
         this.atZone(ZoneOffset.systemDefault()).toLocalDateTime()
 
     companion object {
-        private const val DATA_SOURCE_TWO = "data-source-two"
+        const val DATA_SOURCE_TWO = "data-source-two"
     }
 }
 

@@ -4,11 +4,9 @@ import com.imgarena.techtask.service.GolfTournamentService
 import lombok.RequiredArgsConstructor
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.util.UriComponentsBuilder
+
 
 @RestController
 @RequiredArgsConstructor
@@ -20,12 +18,14 @@ class GolfTournamentController(
 
     @PostMapping("tournament")
     fun createGolfTournament(
+        uriComponentsBuilder: UriComponentsBuilder,
         @RequestHeader(value = DATA_SOURCE_ID_HEADER) dataSourceId: String,
         @RequestBody body: String
     ): ResponseEntity<Void> {
         log.info("Receiving a request from $dataSourceId with payload: $body")
-        golfTournamentService.save(dataSourceId, body)
-        return ResponseEntity.ok().build()
+        val gameTournamentId = golfTournamentService.save(dataSourceId, body)
+        val uriComponents = uriComponentsBuilder.path("/{id}").buildAndExpand(gameTournamentId)
+        return ResponseEntity.created(uriComponents.toUri()).build()
     }
 
     companion object {

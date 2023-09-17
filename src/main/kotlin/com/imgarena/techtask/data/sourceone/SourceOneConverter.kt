@@ -16,7 +16,6 @@ class SourceOneConverter : GolfTournamentConverter<SourceOne>() {
     override fun convert(body: String): GolfTournament =
         with(this.toEntity(body)) {
             GolfTournament(
-                id = 1,
                 externalId = this.tournamentId,
                 externalSource = dataSourceId(),
                 courseName = this.courseName,
@@ -28,6 +27,9 @@ class SourceOneConverter : GolfTournamentConverter<SourceOne>() {
             )
         }
 
+    override fun jClass(): Class<SourceOne> =
+        SourceOne::class.java
+
     private fun toCountryName(countryCode: String): String {
         return Locale.getAvailableLocales()
             .find { locale ->
@@ -35,9 +37,6 @@ class SourceOneConverter : GolfTournamentConverter<SourceOne>() {
             }?.displayCountry ?: "Other"
 
     }
-
-    override fun jClass(): Class<SourceOne> =
-        SourceOne::class.java
 
     companion object {
         const val DATA_SOURCE_ONE = "data-source-one"
