@@ -1,26 +1,29 @@
 package com.imgarena.techtask.data
 
-import com.imgarena.techtask.data.JacksonConfiguration.Companion.objectMapper
 import com.imgarena.techtask.domain.GolfTournament
 import com.imgarena.techtask.model.DataSourceOne
 import org.springframework.stereotype.Component
 
 @Component
-class DataSourceOneConverter {
+class DataSourceOneConverter : GolfTournamentConverter<DataSourceOne>() {
+    override fun getDataSourceId(): String =
+        "data-source-one"
 
-    fun toEntity(body: String): GolfTournament {
-        val data = objectMapper.readValue(body, DataSourceOne::class.java)
-        return GolfTournament(
-            id = 1,
-            externalId = data.tournamentId,
-            externalSource = "data-source-one",
-            courseName = data.courseName,
-            eventName = data.tournamentName,
-            countryName = data.countryCode,
-            startDate = data.startDate,
-            endDate = data.endDate,
-            rounds = data.roundCount
-        )
-    }
+    override fun convert(body: String): GolfTournament =
+        with(this.toEntity(body)) {
+            GolfTournament(
+                id = 1,
+                externalId = this.tournamentId,
+                externalSource = getDataSourceId(),
+                courseName = this.courseName,
+                eventName = this.tournamentName,
+                countryName = this.countryCode,
+                startDate = this.startDate,
+                endDate = this.endDate,
+                rounds = this.roundCount
+            )
+        }
 
+    override fun getJClass(): Class<DataSourceOne> =
+        DataSourceOne::class.java
 }
