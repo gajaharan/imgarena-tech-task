@@ -1,6 +1,7 @@
 package com.imgarena.techtask.controller
 
 import com.imgarena.techtask.service.GolfTournamentService
+import lombok.NonNull
 import lombok.RequiredArgsConstructor
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -19,8 +20,8 @@ class GolfTournamentController(
     @PostMapping("tournament")
     fun createGolfTournament(
         uriComponentsBuilder: UriComponentsBuilder,
-        @RequestHeader(value = DATA_SOURCE_ID_HEADER) dataSourceId: String,
-        @RequestBody body: String
+        @RequestHeader(value = DATA_SOURCE_ID_HEADER) @NonNull dataSourceId: String,
+        @RequestBody @NonNull body: String
     ): ResponseEntity<Void> {
         log.info("Receiving a request from $dataSourceId with payload: $body")
         val gameTournamentId = golfTournamentService.save(dataSourceId, body)
