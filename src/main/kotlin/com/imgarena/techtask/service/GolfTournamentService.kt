@@ -1,6 +1,6 @@
 package com.imgarena.techtask.service
 
-import com.imgarena.techtask.data.GolfTournamentConverter
+import com.imgarena.techtask.data.Converter
 import com.imgarena.techtask.data.Source
 import com.imgarena.techtask.exception.ConverterNotFoundException
 import com.imgarena.techtask.repository.GolfTournamentRepository
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 @RequiredArgsConstructor
 class GolfTournamentService(
-    private val converters: List<GolfTournamentConverter<out Source>>,
+    private val converters: List<Converter<out Source>>,
     private val repository: GolfTournamentRepository
 ) {
     private val log = LoggerFactory.getLogger(this::class.java)
@@ -29,6 +29,6 @@ class GolfTournamentService(
         }
     }
 
-    private fun dataSourceConverters() : Map<String, GolfTournamentConverter<out Source>> =
+    private fun dataSourceConverters() : Map<String, Converter<out Source>> =
         converters.associateBy { it.dataSourceId() }
 }

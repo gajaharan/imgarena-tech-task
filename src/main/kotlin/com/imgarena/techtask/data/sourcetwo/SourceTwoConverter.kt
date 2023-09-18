@@ -1,6 +1,6 @@
 package com.imgarena.techtask.data.sourcetwo
 
-import com.imgarena.techtask.data.GolfTournamentConverter
+import com.imgarena.techtask.data.Converter
 import com.imgarena.techtask.data.Source
 import com.imgarena.techtask.domain.GolfTournament
 import org.springframework.stereotype.Component
@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 @Component
-class SourceTwoConverter : GolfTournamentConverter<SourceTwo>() {
+class SourceTwoConverter : Converter<SourceTwo> {
     override fun dataSourceId(): String = DATA_SOURCE_TWO
 
     override fun convert(body: String): GolfTournament =

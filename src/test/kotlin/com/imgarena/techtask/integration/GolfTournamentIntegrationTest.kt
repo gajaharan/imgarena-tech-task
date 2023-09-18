@@ -51,7 +51,7 @@ class GolfTournamentIntegrationTest {
     }
 
     @Test
-    fun `should return 200 create response when saving golf tournament data for source 2`() {
+    fun `should return 201 create response when saving golf tournament data for source 2`() {
         val requestEntity: HttpEntity<String> = HttpEntity(dataSourceTwoBody, headers(DATA_SOURCE_TWO))
         val response = sendRequest(requestEntity)
 

@@ -1,7 +1,7 @@
 package com.imgarena.techtask.data.sourceone
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.imgarena.techtask.data.GolfTournamentConverter
+import com.imgarena.techtask.data.Converter
 import com.imgarena.techtask.data.Source
 import com.imgarena.techtask.domain.GolfTournament
 import org.springframework.stereotype.Component
@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Component
-class SourceOneConverter : GolfTournamentConverter<SourceOne>() {
+class SourceOneConverter : Converter<SourceOne> {
     override fun dataSourceId(): String = DATA_SOURCE_ONE
 
     override fun convert(body: String): GolfTournament =

@@ -24,10 +24,10 @@
 ## Overview
 
 ### Summary
-| Endpoint                  | method | Status                                          | Notes                                   |
-|:--------------------------|:-------|:------------------------------------------------|:----------------------------------------|
-| `/api/v1/golf/tournament` | POST   | Response code 201 and Location header, 400, 500 | Need to use x-data-src-id in the header |
-|                           |        |                                                 | e.g. data-source-one or data-source-two |
+| Endpoint                  | method | Status                                           | Notes                                   |
+|:--------------------------|:-------|:-------------------------------------------------|:----------------------------------------|
+| `/api/v1/golf/tournament` | POST   | Response code 201 with Location header, 400, 500 | Need to use x-data-src-id in the header |
+|                           |        |                                                  | with data-source-one or data-source-two |
 
 ### Example POST request
 ```
@@ -45,11 +45,17 @@
 }
 ```
 
+### Usage for new data sources: 
+1. create a new package under data (data source name).
+2. Create a new class and extend `Converter` interface. Implement interface functions in `Converter file`.
+3. Create a new data cass that extends `Source` interface in `Converter file`.
+3. Add test to `data` package. Update `GolfTournamentIntegrationTest`.
+
+
 ### Assumptions
 * Used Spring Boot 2 instead of version 3 as this was the version I used two years ago. Past two years used a different framework http4k.
 * Use HTTP headers to define the data source (API demands of the source for the provider) e.g. x-data-src-id.
 * Use the strategy pattern to define a "data source jackson converters" to allow for additional data sources to be accommodated in the future with minimal change to the existing codebase.
-* **Usage for new data sources: create a new package under data (data source name). Create a new class and extend `GolfTournamentConverter`. Implement interface functions. Add test to data package. That is it.**
 * A single common table that will have the base set of data as mandatory columns. Other columns like forecast and playerCount could be stored optionally. Or maybe put it into specific tables e.g. data_source_1_table and data_source_2_table. Not sure how scalable that will be.
 
 ### Further Improvements
